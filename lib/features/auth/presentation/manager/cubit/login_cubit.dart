@@ -5,6 +5,8 @@ import 'package:tennis_ai_app/features/auth/presentation/manager/states/login_st
 class LoginCubit extends Cubit<LoginStates>{
   LoginCubit() : super(InitialLoginState());
 
+   static LoginCubit get(context) => BlocProvider.of(context);  
+
   //loginMethod
    login(String email, String password) async {
     emit(LoginLoadingState());

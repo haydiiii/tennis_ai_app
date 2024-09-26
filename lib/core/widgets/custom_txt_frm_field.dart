@@ -3,12 +3,12 @@ import 'package:tennis_ai_app/core/utils/constants.dart';
 import 'package:tennis_ai_app/core/utils/text_style.dart';
 
 class CustomTextFormField extends StatelessWidget {
-   CustomTextFormField({
+   const CustomTextFormField({
     super.key,
-    required this.labelText, required TextEditingController controller, this.validator,
+    required this.labelText, this.validator, required this.controller,
   });
   final String labelText;
-  final TextEditingController controller = TextEditingController();
+  final TextEditingController controller;
     final String? Function(String?)? validator;
 
   @override
