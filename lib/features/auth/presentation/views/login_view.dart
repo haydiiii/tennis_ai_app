@@ -47,65 +47,67 @@ class _LoginViewState extends State<LoginView> {
               );
             }
           },
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: SingleChildScrollView(
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        'LOGIN',
-                        style: getBodyStyle(
-                          fontsize: 35,
-                          color: AppColors.whiteColor,
-                          fontWeight: FontWeight.bold,
+          child: Builder( // <-- Use Builder to access the correct context
+            builder: (context) => Center(
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: SingleChildScrollView(
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'LOGIN',
+                          style: getBodyStyle(
+                            fontsize: 35,
+                            color: AppColors.whiteColor,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      const Gap(120),
-                      CustomTextFormField(
-                        labelText: 'Email',
-                        controller: _emailController,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please enter your email';
-                          }
-                          return null;
-                        },
-                      ),
-                      const Gap(20),
-                      CustomTextFormField(
-                        labelText: 'Password',
-                        controller: _passwordController,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please enter your password';
-                          }
-                          return null;
-                        },
-                      ),
-                      const Gap(10),
-                      CustomElevatedButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            LoginCubit.get(context).login(_emailController.text,
-                                _passwordController.text);
-                          }
-                        },
-                        color: AppColors.buttonColor,
-                        text: "Sign In",
-                        height: 50,
-                        width: 200,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          side: BorderSide(color: AppColors.whiteColor),
+                        const Gap(120),
+                        CustomTextFormField(
+                          labelText: 'Email',
+                          controller: _emailController,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter your email';
+                            }
+                            return null;
+                          },
                         ),
-                        textColor: AppColors.whiteColor,
-                      ),
-                    ],
+                        const Gap(20),
+                        CustomTextFormField(
+                          labelText: 'Password',
+                          controller: _passwordController,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter your password';
+                            }
+                            return null;
+                          },
+                        ),
+                        const Gap(10),
+                        CustomElevatedButton(
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              BlocProvider.of<LoginCubit>(context).login(
+                                  _emailController.text, _passwordController.text);
+                            }
+                          },
+                          color: AppColors.buttonColor,
+                          text: "Sign In",
+                          height: 50,
+                          width: 200,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            side: BorderSide(color: AppColors.whiteColor),
+                          ),
+                          textColor: AppColors.whiteColor,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
